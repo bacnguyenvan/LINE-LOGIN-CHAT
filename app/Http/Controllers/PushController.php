@@ -16,9 +16,11 @@ class PushController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $message = new TextMessageBuilder('PushMessage test');
 
-        $response = Bot::pushMessage($request->user()->line_id, $message);
+        $message = new TextMessageBuilder('Push message test multi');
+
+        // $response = Bot::pushMessage($request->user()->line_id, $message);
+        $response = Bot::multicast([$request->user()->line_id], $message);
 
         if (! $response->isSucceeded()) {
             logger()->error(static::class.$response->getHTTPStatus(), $response->getJSONDecodedBody());
