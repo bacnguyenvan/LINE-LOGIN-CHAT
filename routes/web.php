@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::match(['GET','POST'],'login', [LoginController::class, 'login'])->name('login');
 Route::get('callback', [LoginController::class, 'callback']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
